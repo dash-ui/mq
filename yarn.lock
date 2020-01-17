@@ -2,6 +2,14 @@
 # yarn lockfile v1
 
 
+"@-ui/styles@^1.0.53":
+  version "1.0.53"
+  resolved "https://registry.yarnpkg.com/@-ui/styles/-/styles-1.0.53.tgz#859bbe88a9f308c01338180d144f990243d24392"
+  dependencies:
+    "@emotion/stylis" "^0.8.4"
+    "@emotion/unitless" "^0.7.4"
+    trie-memoize "^1.0.16"
+
 "@babel/cli@latest":
   version "7.8.3"
   resolved "https://registry.yarnpkg.com/@babel/cli/-/cli-7.8.3.tgz#121beb7c273e0521eb2feeb3883a2b7435d12328"
@@ -755,6 +763,14 @@
   dependencies:
     exec-sh "^0.3.2"
     minimist "^1.2.0"
+
+"@emotion/stylis@^0.8.4":
+  version "0.8.5"
+  resolved "https://registry.yarnpkg.com/@emotion/stylis/-/stylis-0.8.5.tgz#deacb389bd6ee77d1e7fcaccce9e16c5c7e78e04"
+
+"@emotion/unitless@^0.7.4":
+  version "0.7.5"
+  resolved "https://registry.yarnpkg.com/@emotion/unitless/-/unitless-0.7.5.tgz#77211291c1900a700b8a78cfafda3160d76949ed"
 
 "@jest/console@^24.7.1", "@jest/console@^24.9.0":
   version "24.9.0"
@@ -4577,6 +4593,10 @@ tr46@^1.0.1:
   resolved "https://registry.yarnpkg.com/tr46/-/tr46-1.0.1.tgz#a8b13fd6bfd2489519674ccde55ba3693b706d09"
   dependencies:
     punycode "^2.1.0"
+
+trie-memoize@^1.0.16:
+  version "1.0.19"
+  resolved "https://registry.yarnpkg.com/trie-memoize/-/trie-memoize-1.0.19.tgz#f2be8cb86e1ba5e4b65a2653b8c84a5b6e5c49ed"
 
 ts-jest@latest:
   version "24.3.0"
