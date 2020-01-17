@@ -10,6 +10,9 @@ import {
 //
 // use 2:
 // styles({foo: mq('phone', `display: block;`))
+//
+// use 3:
+// styles({foo: mq({phone: true, 'hi-dpi': true}, `font-smoothing: antialias;`})
 export type MediaQueries<T> = {
   readonly [K in keyof T]: T[K]
 }
