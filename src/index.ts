@@ -34,13 +34,15 @@ export type MediaQueryCallback<T> =
   | MediaQueryNameCallback<T>
   | MediaQueryCssCallback<T>
 
-export default function mq<T>(
+export default function mq<T, Vars = StoredVariables>(
   mediaQueries: MediaQueries<T>
 ): MediaQueryCssCallback<T>
-export default function mq<T>(
+export default function mq<T, Vars = StoredVariables>(
   mediaQueries: MediaQueries<T>
 ): MediaQueryNameCallback<T>
-export default function mq<T>(mediaQueries: MediaQueries<T>) {
+export default function mq<T, Vars = StoredVariables>(
+  mediaQueries: MediaQueries<T>
+) {
   const callback = <K extends keyof T>(
     queryName: K | MediaQueryCallbackObject<T>,
     css?: string | StyleObject | StyleGetter
@@ -60,8 +62,8 @@ export default function mq<T>(mediaQueries: MediaQueries<T>) {
     const queryString = `@media ${query}`
     return css === void 0
       ? queryString
-      : (variables: StoredVariables): string =>
-          `${queryString}{${normalizeStyles(css, variables)}}`
+      : (variables: Vars): string =>
+          `${queryString}{${normalizeStyles<Vars>(css, variables)}}`
   }
 
   return callback as MediaQueryCallback<T>
