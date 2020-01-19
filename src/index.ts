@@ -25,27 +25,27 @@ type MediaQueryNameCallback<T> = <K extends keyof T>(
   queryName: K | MediaQueryCallbackObject<T>
 ) => string
 
-type MediaQueryCssCallback<T> = <K extends keyof T>(
+type MediaQueryCssCallback<T, Vars = StoredVariables> = <K extends keyof T>(
   queryName: K | MediaQueryCallbackObject<T>,
-  css?: string | StyleObject | StyleGetter
-) => (variables: StoredVariables) => string
+  css?: string | StyleObject | StyleGetter<Vars>
+) => (variables: Vars) => string
 
-export type MediaQueryCallback<T> =
+export type MediaQueryCallback<T, Vars = StoredVariables> =
   | MediaQueryNameCallback<T>
-  | MediaQueryCssCallback<T>
+  | MediaQueryCssCallback<T, Vars>
 
 export default function mq<T, Vars = StoredVariables>(
   mediaQueries: MediaQueries<T>
-): MediaQueryCssCallback<T>
+): MediaQueryCssCallback<T, Vars>
 export default function mq<T, Vars = StoredVariables>(
   mediaQueries: MediaQueries<T>
 ): MediaQueryNameCallback<T>
 export default function mq<T, Vars = StoredVariables>(
   mediaQueries: MediaQueries<T>
-) {
+): MediaQueryCallback<T, Vars> {
   const callback = <K extends keyof T>(
     queryName: K | MediaQueryCallbackObject<T>,
-    css?: string | StyleObject | StyleGetter
+    css?: string | StyleObject | StyleGetter<Vars>
   ) => {
     let query: T[K] | string
 
@@ -66,5 +66,5 @@ export default function mq<T, Vars = StoredVariables>(
           `${queryString}{${normalizeStyles<Vars>(css, variables)}}`
   }
 
-  return callback as MediaQueryCallback<T>
+  return callback as MediaQueryCallback<T, Vars>
 }
