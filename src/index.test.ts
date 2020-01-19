@@ -17,72 +17,43 @@ const breakpoints = {
 }
 
 describe('mq()', () => {
-  it('should return a media query string w/ one argument', () => {
+  it('should return a media query string when first argument is a string', () => {
     const breakpoint = mq(breakpoints)
     expect(breakpoint('phone')).toBe('@media only screen and (min-width: 0em)')
   })
 
-  it('should return a media query string w/ one object argument', () => {
-    const breakpoint = mq(breakpoints)
-    expect(breakpoint({phone: true})).toBe(
-      '@media only screen and (min-width: 0em)'
+  it('should return a css getter when first argument is an object', () => {
+    type Variables = {
+      color: {
+        blue: string
+      }
+    }
+
+    const breakpoint = mq<typeof breakpoints, Variables>(breakpoints)
+    expect(
+      breakpoint({phone: ({color}) => `color: ${color.blue};`})({
+        color: {blue: 'var(--color-blue)'},
+      })
+    ).toBe('@media only screen and (min-width: 0em){color:var(--color-blue);}')
+  })
+
+  it('should apply default styles for breakpoint objects', () => {
+    type Variables = {
+      color: {
+        blue: string
+      }
+    }
+
+    const breakpoint = mq<typeof breakpoints, Variables>(breakpoints)
+    expect(
+      breakpoint({
+        default: `color: green;`,
+        phone: ({color}) => `color: ${color.blue};`,
+      })({
+        color: {blue: 'var(--color-blue)'},
+      })
+    ).toBe(
+      'color:green;@media only screen and (min-width: 0em){color:var(--color-blue);}'
     )
-  })
-
-  it('should return a media query string w/ two object argument', () => {
-    const breakpoint = mq(breakpoints)
-    expect(
-      breakpoint(
-        {phone: true},
-        ({blue}) => `color: ${blue};`
-      )({blue: 'var(--blue)'})
-    ).toMatchSnapshot('var(--blue)')
-
-    expect(
-      breakpoint({phone: true}, 'color: red;')({blue: 'var(--blue)'})
-    ).toMatchSnapshot('red')
-
-    expect(
-      breakpoint({phone: true}, {color: 'green'})({blue: 'var(--blue)'})
-    ).toMatchSnapshot('green')
-  })
-
-  it('should join multiple query object media queries into one', () => {
-    const breakpoint = mq(breakpoints)
-    expect(
-      breakpoint(
-        {phone: true, 'hi-dpi': true},
-        ({blue}) => `color: ${blue};`
-      )({blue: 'var(--blue)'})
-    ).toMatchSnapshot('phone, hi-dpi')
-  })
-
-  it('should not create media queries for falsy values', () => {
-    const breakpoint = mq(breakpoints)
-    expect(
-      breakpoint(
-        {phone: true, 'hi-dpi': 0},
-        ({blue}) => `color: ${blue};`
-      )({blue: 'var(--blue)'})
-    ).toMatchSnapshot('phone, hi-dpi')
-
-    expect(
-      breakpoint({phone: false, 'hi-dpi': 0}, ({blue}) => `color: ${blue};`)
-    ).toMatchSnapshot('empty string')
-  })
-
-  it('should return a style getter when there is a second argument', () => {
-    const breakpoint = mq(breakpoints)
-    expect(
-      breakpoint('phone', ({blue}) => `color: ${blue};`)({blue: 'var(--blue)'})
-    ).toMatchSnapshot('var(--blue)')
-
-    expect(
-      breakpoint('phone', 'color: red;')({blue: 'var(--blue)'})
-    ).toMatchSnapshot('red')
-
-    expect(
-      breakpoint('phone', {color: 'green'})({blue: 'var(--blue)'})
-    ).toMatchSnapshot('green')
   })
 })

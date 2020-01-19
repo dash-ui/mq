@@ -16,7 +16,7 @@
     <img alt="Code coverage" src="https://img.shields.io/codecov/c/gh/dash-ui/mq?style=for-the-badge&labelColor=24292e">
   </a>
   <a aria-label="Build status" href="https://travis-ci.org/dash-ui/mq">
-    <img alt="Build status" src="https://img.shields.io/travis/dash-ui/mq?style=for-the-badge&labelColor=24292e">
+    <img alt="Build status" src="https://img.shields.io/travis/com/dash-ui/mq?style=for-the-badge&labelColor=24292e">
   </a>
   <a aria-label="NPM version" href="https://www.npmjs.com/package/@-ui/mq">
     <img alt="NPM Version" src="https://img.shields.io/npm/v/@-ui/mq?style=for-the-badge&labelColor=24292e">
@@ -53,14 +53,20 @@ const responsiveBox = styles({
     width: 400px;
     height: 400px;
   `,
-  big: breakpoint(
-    'desktop',
-    `
-    width: 1000px;
-    height: 1000px;
-  `
-  ),
+  big: breakpoint({
+    default: `
+      width: 800px;
+      height: 800px;
+    `,
+    desktop: `
+      width: 1000px;
+      height: 1000px;
+    `,
+  }),
   small: `
+    width: 300px;
+    height: 300px;
+
     ${breakpoint('phone')} {
       width: 200px;
       height: 200px;

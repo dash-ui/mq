@@ -1,8 +1,8 @@
 import {
   normalizeStyles,
-  StoredVariables,
   StyleObject,
   StyleGetter,
+  StoredVariables,
 } from '@-ui/styles'
 
 // use 1:
@@ -13,58 +13,56 @@ import {
 //
 // use 3:
 // styles({foo: mq({phone: true, 'hi-dpi': true}, `font-smoothing: antialias;`})
-export type MediaQueries<T> = {
-  readonly [K in keyof T]: T[K]
+export type MediaQueries<MQ> = {
+  readonly [K in keyof MQ]: MQ[K]
 }
 
-export type MediaQueryCallbackObject<T> = {
-  readonly [K in keyof T]?: any
+export type MediaQueryObject<MQ, Vars> = {
+  readonly [K in keyof MQ | 'default']?:
+    | string
+    | StyleObject
+    | StyleGetter<Vars>
 }
 
-type MediaQueryNameCallback<T> = <K extends keyof T>(
-  queryName: K | MediaQueryCallbackObject<T>
+type MediaQueryNameCallback<MQ, Vars> = <K extends keyof MQ>(
+  queryName: K | MediaQueryObject<MQ, Vars>
 ) => string
 
-type MediaQueryCssCallback<T, Vars = StoredVariables> = <K extends keyof T>(
-  queryName: K | MediaQueryCallbackObject<T>,
+type MediaQueryCssCallback<MQ, Vars> = <K extends keyof MQ>(
+  queryName: K | MediaQueryObject<MQ, Vars>,
   css?: string | StyleObject | StyleGetter<Vars>
 ) => (variables: Vars) => string
 
-export type MediaQueryCallback<T, Vars = StoredVariables> =
-  | MediaQueryNameCallback<T>
-  | MediaQueryCssCallback<T, Vars>
+export type MediaQueryCallback<MQ, Vars> =
+  | MediaQueryNameCallback<MQ, Vars>
+  | MediaQueryCssCallback<MQ, Vars>
 
-export default function mq<T, Vars = StoredVariables>(
-  mediaQueries: MediaQueries<T>
-): MediaQueryCssCallback<T, Vars>
-export default function mq<T, Vars = StoredVariables>(
-  mediaQueries: MediaQueries<T>
-): MediaQueryNameCallback<T>
-export default function mq<T, Vars = StoredVariables>(
-  mediaQueries: MediaQueries<T>
-): MediaQueryCallback<T, Vars> {
-  const callback = <K extends keyof T>(
-    queryName: K | MediaQueryCallbackObject<T>,
-    css?: string | StyleObject | StyleGetter<Vars>
-  ) => {
-    let query: T[K] | string
+export default function mq<MQ, Vars = StoredVariables>(
+  mediaQueries: MediaQueries<MQ>
+): MediaQueryCssCallback<MQ, Vars>
 
+export default function mq<MQ, Vars = StoredVariables>(
+  mediaQueries: MediaQueries<MQ>
+): MediaQueryNameCallback<MQ, Vars>
+
+export default function mq<MQ, Vars = StoredVariables>(
+  mediaQueries: MediaQueries<MQ>
+): MediaQueryCallback<MQ, Vars> {
+  return (<K extends keyof MQ>(queryName: K | MediaQueryObject<MQ, Vars>) => {
     if (typeof queryName === 'object') {
-      query = Object.keys(queryName)
-        .filter(k => Boolean(queryName[k]))
-        .map(qn => mediaQueries[qn])
-        .join(',')
+      return (variables: Vars) => {
+        let css = ''
+
+        for (const key in queryName) {
+          const value = normalizeStyles<Vars>(queryName[key], variables)
+          css +=
+            key === 'default' ? value : `@media ${mediaQueries[key]}{${value}}`
+        }
+
+        return css
+      }
     } else {
-      query = mediaQueries[queryName]
+      return `@media ${mediaQueries[queryName]}`
     }
-
-    if (!query) return ''
-    const queryString = `@media ${query}`
-    return css === void 0
-      ? queryString
-      : (variables: Vars): string =>
-          `${queryString}{${normalizeStyles<Vars>(css, variables)}}`
-  }
-
-  return callback as MediaQueryCallback<T, Vars>
+  }) as MediaQueryCallback<MQ, Vars>
 }
