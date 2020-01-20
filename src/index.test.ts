@@ -29,7 +29,7 @@ describe('mq()', () => {
       }
     }
 
-    const breakpoint = mq<typeof breakpoints, Variables>(breakpoints)
+    const breakpoint = mq<keyof typeof breakpoints, Variables>(breakpoints)
     expect(
       breakpoint({phone: ({color}) => `color: ${color.blue};`})({
         color: {blue: 'var(--color-blue)'},
@@ -44,7 +44,7 @@ describe('mq()', () => {
       }
     }
 
-    const breakpoint = mq<typeof breakpoints, Variables>(breakpoints)
+    const breakpoint = mq<keyof typeof breakpoints, Variables>(breakpoints)
     expect(
       breakpoint({
         default: `color: green;`,
