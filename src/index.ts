@@ -13,29 +13,6 @@ import {
 //
 // use 3:
 // styles({foo: mq({phone: true, 'hi-dpi': true}, `font-smoothing: antialias;`})
-export type MediaQueries<QueryNames extends string> = {
-  readonly [K in QueryNames]: string
-}
-
-export type MediaQueryObject<QueryNames extends string, Vars> = {
-  readonly [K in QueryNames | 'default']?:
-    | string
-    | StyleObject
-    | StyleGetter<Vars>
-}
-
-type MediaQueryNameCallback<QueryNames extends string, Vars> = (
-  queryName: QueryNames | MediaQueryObject<QueryNames, Vars>
-) => string
-
-type MediaQueryCssCallback<QueryNames extends string, Vars> = (
-  queryName: QueryNames | MediaQueryObject<QueryNames, Vars>,
-  css?: string | StyleObject | StyleGetter<Vars>
-) => (variables: Vars) => string
-
-export type MediaQueryCallback<QueryNames extends string, Vars> =
-  | MediaQueryNameCallback<QueryNames, Vars>
-  | MediaQueryCssCallback<QueryNames, Vars>
 
 export default function mq<QueryNames extends string, Vars = StoredVariables>(
   mediaQueries: MediaQueries<QueryNames>
@@ -66,3 +43,27 @@ export default function mq<QueryNames extends string, Vars = StoredVariables>(
     }
   }) as MediaQueryCallback<QueryNames, Vars>
 }
+
+export type MediaQueries<QueryNames extends string> = {
+  readonly [K in QueryNames]: string
+}
+
+export type MediaQueryObject<QueryNames extends string, Vars> = {
+  readonly [K in QueryNames | 'default']?:
+    | string
+    | StyleObject
+    | StyleGetter<Vars>
+}
+
+type MediaQueryNameCallback<QueryNames extends string, Vars> = (
+  queryName: QueryNames | MediaQueryObject<QueryNames, Vars>
+) => string
+
+type MediaQueryCssCallback<QueryNames extends string, Vars> = (
+  queryName: QueryNames | MediaQueryObject<QueryNames, Vars>,
+  css?: string | StyleObject | StyleGetter<Vars>
+) => (variables: Vars) => string
+
+export type MediaQueryCallback<QueryNames extends string, Vars> =
+  | MediaQueryNameCallback<QueryNames, Vars>
+  | MediaQueryCssCallback<QueryNames, Vars>
