@@ -1,9 +1,5 @@
-import {
-  normalizeStyles,
-  StyleObject,
-  StyleGetter,
-  StoredVariables,
-} from '@-ui/styles'
+import {normalizeStyles} from '@-ui/styles'
+import type {StyleObject, StyleGetter, DefaultVars} from '@-ui/styles'
 
 // use 1:
 // styles({foo: `${mq('phone')} { display: none; }`})
@@ -14,15 +10,24 @@ import {
 // use 3:
 // styles({foo: mq({phone: true, 'hi-dpi': true}, `font-smoothing: antialias;`})
 
-export default function mq<QueryNames extends string, Vars = StoredVariables>(
+export default function mq<
+  QueryNames extends string,
+  Vars extends DefaultVars = DefaultVars
+>(
   mediaQueries: MediaQueries<QueryNames>
 ): MediaQueryCssCallback<QueryNames, Vars>
 
-export default function mq<QueryNames extends string, Vars = StoredVariables>(
+export default function mq<
+  QueryNames extends string,
+  Vars extends DefaultVars = DefaultVars
+>(
   mediaQueries: MediaQueries<QueryNames>
 ): MediaQueryNameCallback<QueryNames, Vars>
 
-export default function mq<QueryNames extends string, Vars = StoredVariables>(
+export default function mq<
+  QueryNames extends string,
+  Vars extends DefaultVars = DefaultVars
+>(
   mediaQueries: MediaQueries<QueryNames>
 ): MediaQueryCallback<QueryNames, Vars> {
   return ((queryName: QueryNames | MediaQueryObject<QueryNames, Vars>) => {

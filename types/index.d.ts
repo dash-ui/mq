@@ -1,8 +1,14 @@
-import {StyleObject, StyleGetter, StoredVariables} from '@-ui/styles'
-export default function mq<QueryNames extends string, Vars = StoredVariables>(
+import type {StyleObject, StyleGetter, DefaultVars} from '@-ui/styles'
+export default function mq<
+  QueryNames extends string,
+  Vars extends DefaultVars = DefaultVars
+>(
   mediaQueries: MediaQueries<QueryNames>
 ): MediaQueryCssCallback<QueryNames, Vars>
-export default function mq<QueryNames extends string, Vars = StoredVariables>(
+export default function mq<
+  QueryNames extends string,
+  Vars extends DefaultVars = DefaultVars
+>(
   mediaQueries: MediaQueries<QueryNames>
 ): MediaQueryNameCallback<QueryNames, Vars>
 export declare type MediaQueries<QueryNames extends string> = {
