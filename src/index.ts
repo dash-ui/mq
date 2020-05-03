@@ -1,5 +1,5 @@
-import {normalizeStyles} from '@-ui/styles'
-import type {StyleObject, StyleGetter, DefaultVars} from '@-ui/styles'
+import {compileStyles} from '@dash-ui/styles'
+import type {StyleObject, StyleGetter, DefaultVars} from '@dash-ui/styles'
 
 // use 1:
 // styles({foo: `${mq('phone')} { display: none; }`})
@@ -36,7 +36,7 @@ export default function mq<
         let css = ''
 
         for (const key in queryName) {
-          const value = normalizeStyles<Vars>(queryName[key], variables)
+          const value = compileStyles<Vars>(queryName[key], variables)
           css +=
             key === 'default' ? value : `@media ${mediaQueries[key]}{${value}}`
         }

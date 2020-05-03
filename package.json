@@ -1,6 +1,6 @@
 {
-  "name": "@-ui/mq",
-  "version": "2.1.0",
+  "name": "@dash-ui/mq",
+  "version": "0.1.0",
   "homepage": "https://github.com/dash-ui/mq#readme",
   "repository": "github:dash-ui/mq",
   "bugs": "https://github.com/dash-ui/mq/issues",
@@ -11,21 +11,31 @@
     "dash",
     "dash ui",
     "dash ui media queries",
-    "-ui",
     "dash ui breakpoints",
-    "dash ui breakpoint",
-    "-ui breakpoint"
+    "dash breakpoints"
   ],
   "main": "dist/main/index.js",
   "module": "dist/module/index.js",
+  "source": "dist/index.ts",
   "types": "types/index.d.ts",
+  "exports": {
+    ".": {
+      "browser": "./dist/module/index.js",
+      "import": "./dist/esm/index.mjs",
+      "require": "./dist/main/index.js"
+    },
+    "./package.json": "./package.json",
+    "./": "./"
+  },
   "files": [
     "/dist",
+    "/src",
     "/types"
   ],
   "sideEffects": false,
   "scripts": {
-    "build": "npm run build-main && npm run build-module && npm run build-types",
+    "build": "npm run build-esm && npm run build-main && npm run build-module && npm run build-types",
+    "build-esm": "npm run compile -- -d dist/esm --env-name esm --out-file-extension .mjs",
     "build-main": "npm run compile -- -d dist/main --env-name main",
     "build-module": "npm run compile -- -d dist/module --env-name module",
     "build-types": "tsc -p tsconfig.json -d --outDir types --emitDeclarationOnly",
@@ -52,23 +62,24 @@
     ]
   },
   "devDependencies": {
-    "@-ui/styles": "^1.2.3",
+    "@dash-ui/styles": "^0.1.2",
     "@lunde/babel-preset-es": "latest",
     "@types/jest": "latest",
-    "@typescript-eslint/eslint-plugin": "latest",
-    "@typescript-eslint/parser": "latest",
+    "@typescript-eslint/eslint-plugin": "^2.30.0",
+    "@typescript-eslint/parser": "^2.30.0",
+    "babel-plugin-annotate-pure-calls": "^0.4.0",
     "eslint": "latest",
     "eslint-import-resolver-jest": "latest",
     "eslint-plugin-jest": "latest",
     "husky": "latest",
-    "jest": "latest",
-    "lint-staged": "latest",
-    "prettier": "latest",
+    "jest": "^25.5.4",
+    "lint-staged": "^10.2.2",
+    "prettier": "^2.0.5",
     "ts-jest": "latest",
     "typescript": "latest"
   },
   "dependencies": {},
   "peerDependencies": {
-    "@-ui/styles": "^1.2.3"
+    "@dash-ui/styles": "^0.1.2"
   }
 }

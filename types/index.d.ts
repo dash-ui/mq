@@ -1,4 +1,4 @@
-import type {StyleObject, StyleGetter, DefaultVars} from '@-ui/styles'
+import type {StyleObject, StyleGetter, DefaultVars} from '@dash-ui/styles'
 export default function mq<
   QueryNames extends string,
   Vars extends DefaultVars = DefaultVars
