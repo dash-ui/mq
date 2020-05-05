@@ -1,6 +1,6 @@
 {
   "name": "@dash-ui/mq",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "homepage": "https://github.com/dash-ui/mq#readme",
   "repository": "github:dash-ui/mq",
   "bugs": "https://github.com/dash-ui/mq/issues",
@@ -22,7 +22,10 @@
     ".": {
       "browser": "./dist/module/index.js",
       "import": "./dist/esm/index.mjs",
-      "require": "./dist/main/index.js"
+      "require": "./dist/main/index.js",
+      "default": "./dist/main/index.js",
+      "source": "./src/index.ts",
+      "types": "./types/index.d.ts"
     },
     "./package.json": "./package.json",
     "./": "./"
@@ -62,7 +65,7 @@
     ]
   },
   "devDependencies": {
-    "@dash-ui/styles": "^0.2.1",
+    "@dash-ui/styles": "^0.2.2",
     "@lunde/babel-preset-es": "latest",
     "@types/jest": "latest",
     "@typescript-eslint/eslint-plugin": "^2.30.0",
@@ -80,6 +83,6 @@
   },
   "dependencies": {},
   "peerDependencies": {
-    "@dash-ui/styles": "^0.1.2"
+    "@dash-ui/styles": "^0.2.2"
   }
 }
