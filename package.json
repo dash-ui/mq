@@ -1,6 +1,6 @@
 {
   "name": "@dash-ui/mq",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/dash-ui/mq#readme",
   "repository": "github:dash-ui/mq",
   "bugs": "https://github.com/dash-ui/mq/issues",
@@ -62,7 +62,7 @@
     ]
   },
   "devDependencies": {
-    "@dash-ui/styles": "^0.1.2",
+    "@dash-ui/styles": "^0.2.1",
     "@lunde/babel-preset-es": "latest",
     "@types/jest": "latest",
     "@typescript-eslint/eslint-plugin": "^2.30.0",
