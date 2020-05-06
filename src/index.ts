@@ -1,5 +1,5 @@
 import {compileStyles} from '@dash-ui/styles'
-import type {StyleObject, StyleGetter, DefaultVars} from '@dash-ui/styles'
+import type {StyleObject, StyleCallback, DashVariables} from '@dash-ui/styles'
 
 // use 1:
 // styles({foo: `${mq('phone')} { display: none; }`})
@@ -12,31 +12,31 @@ import type {StyleObject, StyleGetter, DefaultVars} from '@dash-ui/styles'
 
 export default function mq<
   QueryNames extends string,
-  Vars extends DefaultVars = DefaultVars
+  Variables extends DashVariables = DashVariables
 >(
   mediaQueries: MediaQueries<QueryNames>
-): MediaQueryCssCallback<QueryNames, Vars>
+): MediaQueryCssCallback<QueryNames, Variables>
 
 export default function mq<
   QueryNames extends string,
-  Vars extends DefaultVars = DefaultVars
+  Variables extends DashVariables = DashVariables
 >(
   mediaQueries: MediaQueries<QueryNames>
-): MediaQueryNameCallback<QueryNames, Vars>
+): MediaQueryNameCallback<QueryNames, Variables>
 
 export default function mq<
   QueryNames extends string,
-  Vars extends DefaultVars = DefaultVars
+  Variables extends DashVariables = DashVariables
 >(
   mediaQueries: MediaQueries<QueryNames>
-): MediaQueryCallback<QueryNames, Vars> {
-  return ((queryName: QueryNames | MediaQueryObject<QueryNames, Vars>) => {
+): MediaQueryCallback<QueryNames, Variables> {
+  return ((queryName: QueryNames | MediaQueryObject<QueryNames, Variables>) => {
     if (typeof queryName === 'object') {
-      return (variables: Vars) => {
+      return (variables: Variables) => {
         let css = ''
 
         for (const key in queryName) {
-          const value = compileStyles<Vars>(queryName[key], variables)
+          const value = compileStyles<Variables>(queryName[key], variables)
           css +=
             key === 'default' ? value : `@media ${mediaQueries[key]}{${value}}`
         }
@@ -46,29 +46,29 @@ export default function mq<
     } else {
       return `@media ${mediaQueries[queryName]}`
     }
-  }) as MediaQueryCallback<QueryNames, Vars>
+  }) as MediaQueryCallback<QueryNames, Variables>
 }
 
 export type MediaQueries<QueryNames extends string> = {
   readonly [K in QueryNames]: string
 }
 
-export type MediaQueryObject<QueryNames extends string, Vars> = {
+export type MediaQueryObject<QueryNames extends string, Variables> = {
   readonly [K in QueryNames | 'default']?:
     | string
     | StyleObject
-    | StyleGetter<Vars>
+    | StyleCallback<Variables>
 }
 
-type MediaQueryNameCallback<QueryNames extends string, Vars> = (
-  queryName: QueryNames | MediaQueryObject<QueryNames, Vars>
+type MediaQueryNameCallback<QueryNames extends string, Variables> = (
+  queryName: QueryNames | MediaQueryObject<QueryNames, Variables>
 ) => string
 
-type MediaQueryCssCallback<QueryNames extends string, Vars> = (
-  queryName: QueryNames | MediaQueryObject<QueryNames, Vars>,
-  css?: string | StyleObject | StyleGetter<Vars>
-) => (variables: Vars) => string
+type MediaQueryCssCallback<QueryNames extends string, Variables> = (
+  queryName: QueryNames | MediaQueryObject<QueryNames, Variables>,
+  css?: string | StyleObject | StyleCallback<Variables>
+) => (variables: Variables) => string
 
-export type MediaQueryCallback<QueryNames extends string, Vars> =
-  | MediaQueryNameCallback<QueryNames, Vars>
-  | MediaQueryCssCallback<QueryNames, Vars>
+export type MediaQueryCallback<QueryNames extends string, Variables> =
+  | MediaQueryNameCallback<QueryNames, Variables>
+  | MediaQueryCssCallback<QueryNames, Variables>

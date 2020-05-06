@@ -1,33 +1,33 @@
-import type {StyleObject, StyleGetter, DefaultVars} from '@dash-ui/styles'
+import type {StyleObject, StyleCallback, DashVariables} from '@dash-ui/styles'
 export default function mq<
   QueryNames extends string,
-  Vars extends DefaultVars = DefaultVars
+  Variables extends DashVariables = DashVariables
 >(
   mediaQueries: MediaQueries<QueryNames>
-): MediaQueryCssCallback<QueryNames, Vars>
+): MediaQueryCssCallback<QueryNames, Variables>
 export default function mq<
   QueryNames extends string,
-  Vars extends DefaultVars = DefaultVars
+  Variables extends DashVariables = DashVariables
 >(
   mediaQueries: MediaQueries<QueryNames>
-): MediaQueryNameCallback<QueryNames, Vars>
+): MediaQueryNameCallback<QueryNames, Variables>
 export declare type MediaQueries<QueryNames extends string> = {
   readonly [K in QueryNames]: string
 }
-export declare type MediaQueryObject<QueryNames extends string, Vars> = {
+export declare type MediaQueryObject<QueryNames extends string, Variables> = {
   readonly [K in QueryNames | 'default']?:
     | string
     | StyleObject
-    | StyleGetter<Vars>
+    | StyleCallback<Variables>
 }
-declare type MediaQueryNameCallback<QueryNames extends string, Vars> = (
-  queryName: QueryNames | MediaQueryObject<QueryNames, Vars>
+declare type MediaQueryNameCallback<QueryNames extends string, Variables> = (
+  queryName: QueryNames | MediaQueryObject<QueryNames, Variables>
 ) => string
-declare type MediaQueryCssCallback<QueryNames extends string, Vars> = (
-  queryName: QueryNames | MediaQueryObject<QueryNames, Vars>,
-  css?: string | StyleObject | StyleGetter<Vars>
-) => (variables: Vars) => string
-export declare type MediaQueryCallback<QueryNames extends string, Vars> =
-  | MediaQueryNameCallback<QueryNames, Vars>
-  | MediaQueryCssCallback<QueryNames, Vars>
+declare type MediaQueryCssCallback<QueryNames extends string, Variables> = (
+  queryName: QueryNames | MediaQueryObject<QueryNames, Variables>,
+  css?: string | StyleObject | StyleCallback<Variables>
+) => (variables: Variables) => string
+export declare type MediaQueryCallback<QueryNames extends string, Variables> =
+  | MediaQueryNameCallback<QueryNames, Variables>
+  | MediaQueryCssCallback<QueryNames, Variables>
 export {}
