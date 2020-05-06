@@ -53,22 +53,32 @@ export type MediaQueries<QueryNames extends string> = {
   readonly [K in QueryNames]: string
 }
 
-export type MediaQueryObject<QueryNames extends string, Variables> = {
+export type MediaQueryObject<
+  QueryNames extends string,
+  Variables extends DashVariables = DashVariables
+> = {
   readonly [K in QueryNames | 'default']?:
     | string
     | StyleObject
     | StyleCallback<Variables>
 }
 
-type MediaQueryNameCallback<QueryNames extends string, Variables> = (
-  queryName: QueryNames | MediaQueryObject<QueryNames, Variables>
-) => string
+type MediaQueryNameCallback<
+  QueryNames extends string,
+  Variables extends DashVariables = DashVariables
+> = (queryName: QueryNames | MediaQueryObject<QueryNames, Variables>) => string
 
-type MediaQueryCssCallback<QueryNames extends string, Variables> = (
+type MediaQueryCssCallback<
+  QueryNames extends string,
+  Variables extends DashVariables = DashVariables
+> = (
   queryName: QueryNames | MediaQueryObject<QueryNames, Variables>,
   css?: string | StyleObject | StyleCallback<Variables>
 ) => (variables: Variables) => string
 
-export type MediaQueryCallback<QueryNames extends string, Variables> =
+export type MediaQueryCallback<
+  QueryNames extends string,
+  Variables extends DashVariables = DashVariables
+> =
   | MediaQueryNameCallback<QueryNames, Variables>
   | MediaQueryCssCallback<QueryNames, Variables>
