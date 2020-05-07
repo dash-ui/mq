@@ -53,7 +53,49 @@ describe('mq()', () => {
         color: {blue: 'var(--color-blue)'},
       })
     ).toBe(
-      'color:green;@media only screen and (min-width: 0em){color:var(--color-blue);}'
+      'color: green;@media only screen and (min-width: 0em){color:var(--color-blue);}'
+    )
+  })
+
+  it('should apply styles for breakpoint objects w/ string style', () => {
+    type Variables = {
+      color: {
+        blue: string
+      }
+    }
+
+    const breakpoint = mq<keyof typeof breakpoints, Variables>(breakpoints)
+    expect(
+      breakpoint({
+        default: `color: green;`,
+        phone: `color:var(--color-blue);`,
+      })({
+        color: {blue: 'var(--color-blue)'},
+      })
+    ).toBe(
+      'color: green;@media only screen and (min-width: 0em){color:var(--color-blue);}'
+    )
+  })
+
+  it('should apply styles for breakpoint objects w/ object style', () => {
+    type Variables = {
+      color: {
+        blue: string
+      }
+    }
+
+    const breakpoint = mq<keyof typeof breakpoints, Variables>(breakpoints)
+    expect(
+      breakpoint({
+        default: `color: green;`,
+        phone: {
+          color: 'var(--color-blue)',
+        },
+      })({
+        color: {blue: 'var(--color-blue)'},
+      })
+    ).toBe(
+      'color: green;@media only screen and (min-width: 0em){color:var(--color-blue);}'
     )
   })
 })

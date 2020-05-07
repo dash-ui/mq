@@ -36,7 +36,11 @@ export default function mq<
         let css = ''
 
         for (const key in queryName) {
-          const value = compileStyles<Variables>(queryName[key], variables)
+          let value = queryName[key]
+          value =
+            typeof queryName[key] === 'string'
+              ? queryName[key]
+              : compileStyles<Variables>(queryName[key], variables)
           css +=
             key === 'default' ? value : `@media ${mediaQueries[key]}{${value}}`
         }
