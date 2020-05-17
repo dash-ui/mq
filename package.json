@@ -65,7 +65,7 @@
     ]
   },
   "devDependencies": {
-    "@dash-ui/styles": "^0.3.0",
+    "@dash-ui/styles": "^0.4.5",
     "@lunde/babel-preset-es": "latest",
     "@types/jest": "latest",
     "@typescript-eslint/eslint-plugin": "^2.30.0",
