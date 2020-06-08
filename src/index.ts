@@ -10,21 +10,21 @@ import type {StyleObject, StyleCallback, DashVariables} from '@dash-ui/styles'
 // use 3:
 // styles({foo: mq({phone: true, 'hi-dpi': true}, `font-smoothing: antialias;`})
 
-export default function mq<
+function mq<
   QueryNames extends string,
   Variables extends DashVariables = DashVariables
 >(
   mediaQueries: MediaQueries<QueryNames>
 ): MediaQueryCssCallback<QueryNames, Variables>
 
-export default function mq<
+function mq<
   QueryNames extends string,
   Variables extends DashVariables = DashVariables
 >(
   mediaQueries: MediaQueries<QueryNames>
 ): MediaQueryNameCallback<QueryNames, Variables>
 
-export default function mq<
+function mq<
   QueryNames extends string,
   Variables extends DashVariables = DashVariables
 >(
@@ -36,13 +36,16 @@ export default function mq<
         let css = ''
 
         for (const key in queryName) {
-          let value = queryName[key]
+          let value =
+            queryName[key as keyof MediaQueryObject<QueryNames, Variables>]
           value =
-            typeof queryName[key] === 'string'
-              ? queryName[key]
-              : compileStyles<Variables>(queryName[key], variables)
+            typeof value === 'string'
+              ? value
+              : compileStyles<Variables>(value, variables)
           css +=
-            key === 'default' ? value : `@media ${mediaQueries[key]}{${value}}`
+            key === 'default'
+              ? value
+              : `@media ${mediaQueries[key as QueryNames]}{${value}}`
         }
 
         return css
@@ -52,6 +55,8 @@ export default function mq<
     }
   }) as MediaQueryCallback<QueryNames, Variables>
 }
+
+export default mq
 
 export type MediaQueries<QueryNames extends string> = {
   readonly [K in QueryNames]: string

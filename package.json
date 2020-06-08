@@ -1,9 +1,10 @@
 {
   "name": "@dash-ui/mq",
-  "version": "0.1.5",
+  "version": "0.2.0",
   "homepage": "https://github.com/dash-ui/mq#readme",
   "repository": "github:dash-ui/mq",
   "bugs": "https://github.com/dash-ui/mq/issues",
+  "author": "Jared Lunde <jared.lunde@gmail.com> (https://jaredLunde.com)",
   "license": "MIT",
   "description": "A utility function for adding stored media queries and breakpoints to dash-ui styles",
   "keywords": [
@@ -16,16 +17,18 @@
   ],
   "main": "dist/main/index.js",
   "module": "dist/module/index.js",
-  "source": "dist/index.ts",
+  "unpkg": "dist/umd/mq.js",
+  "source": "src/index.ts",
   "types": "types/index.d.ts",
   "exports": {
     ".": {
       "browser": "./dist/module/index.js",
       "import": "./dist/esm/index.mjs",
       "require": "./dist/main/index.js",
-      "default": "./dist/main/index.js",
+      "umd": "./dist/umd/mq.js",
       "source": "./src/index.ts",
-      "types": "./types/index.d.ts"
+      "types": "./types/index.d.ts",
+      "default": "./dist/main/index.js"
     },
     "./package.json": "./package.json",
     "./": "./"
@@ -37,22 +40,18 @@
   ],
   "sideEffects": false,
   "scripts": {
-    "build": "npm run build-esm && npm run build-main && npm run build-module && npm run build-types",
-    "build-esm": "npm run compile -- -d dist/esm --env-name esm --out-file-extension .mjs",
-    "build-main": "npm run compile -- -d dist/main --env-name main",
-    "build-module": "npm run compile -- -d dist/module --env-name module",
-    "build-types": "tsc -p tsconfig.json -d --outDir types --emitDeclarationOnly",
-    "check-types": "tsc --noEmit -p tsconfig.json",
-    "compile": "babel src -x .ts --ignore \"**/*.test.ts\" --delete-dir-on-start",
-    "format": "prettier --write \"**/*.{ts,js,md,yml,json,eslintrc,prettierrc}\"",
+    "build": "lundle build --umd-case camel",
+    "check-types": "lundle check-types",
+    "dev": "lundle build -f module,cjs -w",
+    "format": "prettier --write \"{,!(node_modules|dist|coverage)/**/}*.{ts,js,md,yml,json}\"",
     "lint": "eslint . --ext .ts",
     "prepublishOnly": "npm run lint && npm run test && npm run build && npm run format",
     "test": "jest",
-    "validate": "npm run check-types && npm run lint && npm run test -- --coverage"
+    "validate": "lundle check-types && npm run lint && jest --coverage"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run build-types && git add types && lint-staged"
+      "pre-commit": "lundle check-types && lint-staged"
     }
   },
   "lint-staged": {
@@ -64,25 +63,58 @@
       "prettier --write"
     ]
   },
+  "eslintConfig": {
+    "extends": [
+      "lunde"
+    ]
+  },
+  "eslintIgnore": [
+    "node_modules",
+    "coverage",
+    "dist",
+    "test",
+    "*.config.js"
+  ],
+  "jest": {
+    "moduleDirectories": [
+      "node_modules",
+      "src",
+      "test"
+    ],
+    "testMatch": [
+      "<rootDir>/src/**/?(*.)test.ts"
+    ],
+    "collectCoverageFrom": [
+      "**/src/**/*.ts"
+    ],
+    "setupFilesAfterEnv": [
+      "./test/setup.js"
+    ],
+    "snapshotResolver": "./test/resolve-snapshot.js",
+    "globals": {
+      "__DEV__": true
+    }
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "bracketSpacing": false
+  },
   "devDependencies": {
-    "@dash-ui/styles": "^0.4.5",
-    "@lunde/babel-preset-es": "latest",
+    "@dash-ui/styles": "^0.5.0",
     "@types/jest": "latest",
-    "@typescript-eslint/eslint-plugin": "^2.30.0",
-    "@typescript-eslint/parser": "^2.30.0",
-    "babel-plugin-annotate-pure-calls": "^0.4.0",
+    "babel-jest": "latest",
     "eslint": "latest",
-    "eslint-import-resolver-jest": "latest",
-    "eslint-plugin-jest": "^23.9.0",
+    "eslint-config-lunde": "latest",
     "husky": "latest",
-    "jest": "^25.5.4",
-    "lint-staged": "^10.2.2",
-    "prettier": "^2.0.5",
-    "ts-jest": "latest",
+    "jest": "latest",
+    "lint-staged": "latest",
+    "lundle": "latest",
+    "prettier": "latest",
     "typescript": "latest"
   },
   "dependencies": {},
   "peerDependencies": {
-    "@dash-ui/styles": "^0.3.0"
+    "@dash-ui/styles": ">=0.3.0"
   }
 }

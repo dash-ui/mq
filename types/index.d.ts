@@ -1,16 +1,17 @@
 import type {StyleObject, StyleCallback, DashVariables} from '@dash-ui/styles'
-export default function mq<
+declare function mq<
   QueryNames extends string,
   Variables extends DashVariables = DashVariables
 >(
   mediaQueries: MediaQueries<QueryNames>
 ): MediaQueryCssCallback<QueryNames, Variables>
-export default function mq<
+declare function mq<
   QueryNames extends string,
   Variables extends DashVariables = DashVariables
 >(
   mediaQueries: MediaQueries<QueryNames>
 ): MediaQueryNameCallback<QueryNames, Variables>
+export default mq
 export declare type MediaQueries<QueryNames extends string> = {
   readonly [K in QueryNames]: string
 }
@@ -40,4 +41,3 @@ export declare type MediaQueryCallback<
 > =
   | MediaQueryNameCallback<QueryNames, Variables>
   | MediaQueryCssCallback<QueryNames, Variables>
-export {}
