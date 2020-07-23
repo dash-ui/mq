@@ -188,8 +188,7 @@ type MediaQueryCssCallback<
   QueryNames extends string,
   Variables extends DashVariables = DashVariables
 > = (
-  queryName: QueryNames | MediaQueryObject<QueryNames, Variables>,
-  css?: string | StyleObject | StyleCallback<Variables>
+  queryName: QueryNames | MediaQueryObject<QueryNames, Variables>
 ) => (variables: Variables) => string
 
 export type MediaQueryObject<
