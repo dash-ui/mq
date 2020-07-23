@@ -167,9 +167,6 @@ function mqStyles(
 ): MediaQueryNameCallback | MediaQueryCssCallback
 ```
 
-[`MediaQueryNameCallback`](#mediaquerynamecallback)
-| [`MediaQueryCssCallback`](<(#mediaquerycsscallback)>)
-
 ### MediaQueryNameCallback
 
 A function that returns a media query string e.g. `"@media only screen and (min-width: 0em)"`.
