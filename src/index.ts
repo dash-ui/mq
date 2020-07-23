@@ -6,9 +6,6 @@ import type {StyleObject, StyleCallback, DashVariables} from '@dash-ui/styles'
 //
 // use 2:
 // styles({foo: mq('phone', `display: block;`))
-//
-// use 3:
-// styles({foo: mq({phone: true, 'hi-dpi': true}, `font-smoothing: antialias;`})
 
 /**
  * A factory function that creates a utility for adding breakpoints and
