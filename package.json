@@ -13,6 +13,7 @@
     "dash ui",
     "dash ui media queries",
     "dash ui breakpoints",
+    "dash media queries",
     "dash breakpoints"
   ],
   "main": "dist/main/index.js",
