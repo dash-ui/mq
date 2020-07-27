@@ -140,17 +140,17 @@ const Component = () => (
 
 ```typescript
 function mq<
-  Variables extends DashVariables = DashVariables,
+  Tokens extends DashTokens = DashTokens,
   QueryNames extends string = string
 >(
   mediaQueries: MediaQueries<QueryNames>
-): MediaQueryCssCallback<QueryNames, Variables>
+): MediaQueryCssCallback<QueryNames, Tokens>
 function mq<
-  Variables extends DashVariables = DashVariables,
+  Tokens extends DashTokens = DashTokens,
   QueryNames extends string = string
 >(
   mediaQueries: MediaQueries<QueryNames>
-): MediaQueryNameCallback<QueryNames, Variables>
+): MediaQueryNameCallback<QueryNames, Tokens>
 ```
 
 | Argument     | Type                                   | Required? | Description                           |
@@ -163,7 +163,7 @@ function mq<
 // When a `string` is provided as the `mediaQueries` argument, this
 // will return a `MediaQueryNameCallback`, otherwise a `MediaQueryCssCallback`
 function mqStyles(
-  queryName: QueryNames | MediaQueryObject<QueryNames, Variables>
+  queryName: QueryNames | MediaQueryObject<QueryNames, Tokens>
 ): MediaQueryNameCallback | MediaQueryCssCallback
 ```
 
@@ -174,8 +174,8 @@ A function that returns a media query string e.g. `"@media only screen and (min-
 ```typescript
 type MediaQueryNameCallback<
   QueryNames extends string,
-  Variables extends DashVariables = DashVariables
-> = (queryName: QueryNames | MediaQueryObject<QueryNames, Variables>) => string
+  Tokens extends DashTokens = DashTokens
+> = (queryName: QueryNames | MediaQueryObject<QueryNames, Tokens>) => string
 ```
 
 ### MediaQueryCssCallback
@@ -186,19 +186,19 @@ functions that accept one. i.e. `styles()`, `styles.one()`, `styles.cls()`, and 
 ```typescript
 type MediaQueryCssCallback<
   QueryNames extends string,
-  Variables extends DashVariables = DashVariables
+  Tokens extends DashTokens = DashTokens
 > = (
-  queryName: QueryNames | MediaQueryObject<QueryNames, Variables>
-) => (variables: Variables) => string
+  queryName: QueryNames | MediaQueryObject<QueryNames, Tokens>
+) => (tokens: Tokens) => string
 
 export type MediaQueryObject<
   QueryNames extends string,
-  Variables extends DashVariables = DashVariables
+  Tokens extends DashTokens = DashTokens
 > = {
   readonly [K in QueryNames | 'default']?:
     | string
     | StyleObject
-    | StyleCallback<Variables>
+    | StyleCallback<Tokens>
 }
 ```
 

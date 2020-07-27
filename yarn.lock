@@ -1156,10 +1156,10 @@
   resolved "https://registry.yarnpkg.com/@commitlint/types/-/types-9.0.1.tgz#df281f0f3d8f3adb10c95e4dd72b16acf41b5400"
   integrity sha512-wo2rHprtDzTHf4tiSxavktJ52ntiwmg7eHNGFLH38G1of8OfGVwOc1sVbpM4jN/HK/rCMhYOi6xzoPqsv0537A==
 
-"@dash-ui/styles@^0.7.3":
-  version "0.7.3"
-  resolved "https://registry.yarnpkg.com/@dash-ui/styles/-/styles-0.7.3.tgz#17c5597281038d5508f610453b06e425a4fb6876"
-  integrity sha512-ZCncswU/usp1Yc0s5ALEoTgAyyoMhLq60CLJkB53VZxXdveT3LrYT7v32wmIHDClDe0dpvHUDOeII69jHR5y4A==
+"@dash-ui/styles@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@dash-ui/styles/-/styles-0.8.0.tgz#86a2a0bb9e843d09c4ca3bd0594469de297c4cf1"
+  integrity sha512-0q9JMJ87mzttEzpTVBBWyxIPg3lTKs/xFcRbB3pRsdyaKF+qUlIyRrr9cnwD8yVap7i7vR46S2ZL9eN8zeo/7w==
   dependencies:
     "@dash-ui/stylis" "^1.0.5"
     "@dash-ui/unitless" "^2.0.0"
