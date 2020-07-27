@@ -1,4 +1,4 @@
-import type {StyleObject, StyleCallback, DashVariables} from '@dash-ui/styles'
+import type {StyleObject, StyleCallback, DashTokens} from '@dash-ui/styles'
 /**
  * A factory function that creates a utility for adding breakpoints and
  * media queries to Dash styles
@@ -6,37 +6,37 @@ import type {StyleObject, StyleCallback, DashVariables} from '@dash-ui/styles'
  * @param mediaQueries A map of media query name/query pairs
  */
 declare function mq<
-  Variables extends DashVariables = DashVariables,
+  Tokens extends DashTokens = DashTokens,
   QueryNames extends string = string
 >(
   mediaQueries: MediaQueries<QueryNames>
-): MediaQueryCssCallback<QueryNames, Variables>
+): MediaQueryCssCallback<QueryNames, Tokens>
 declare function mq<
-  Variables extends DashVariables = DashVariables,
+  Tokens extends DashTokens = DashTokens,
   QueryNames extends string = string
 >(
   mediaQueries: MediaQueries<QueryNames>
-): MediaQueryNameCallback<QueryNames, Variables>
+): MediaQueryNameCallback<QueryNames, Tokens>
 export default mq
 export declare type MediaQueries<QueryNames extends string> = {
   readonly [K in QueryNames]: string
 }
 declare type MediaQueryNameCallback<
   QueryNames extends string,
-  Variables extends DashVariables = DashVariables
-> = (queryName: QueryNames | MediaQueryObject<QueryNames, Variables>) => string
+  Tokens extends DashTokens = DashTokens
+> = (queryName: QueryNames | MediaQueryObject<QueryNames, Tokens>) => string
 declare type MediaQueryCssCallback<
   QueryNames extends string,
-  Variables extends DashVariables = DashVariables
+  Tokens extends DashTokens = DashTokens
 > = (
-  queryName: QueryNames | MediaQueryObject<QueryNames, Variables>
-) => (variables: Variables) => string
+  queryName: QueryNames | MediaQueryObject<QueryNames, Tokens>
+) => (tokens: Tokens) => string
 export declare type MediaQueryObject<
   QueryNames extends string,
-  Variables extends DashVariables = DashVariables
+  Tokens extends DashTokens = DashTokens
 > = {
   readonly [K in QueryNames | 'default']?:
     | string
     | StyleObject
-    | StyleCallback<Variables>
+    | StyleCallback<Tokens>
 }
