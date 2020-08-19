@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.4.1](https://github.com/dash-ui/mq/compare/v0.4.0...v0.4.1) (2020-08-19)
+
+### Bug Fixes
+
+- **types:** fix return value overload ([ee0bc1b](https://github.com/dash-ui/mq/commit/ee0bc1b2ad3262933e292846677eff08bdce56c3))
+
 ## [0.4.0](https://github.com/dash-ui/mq/compare/v0.3.0...v0.4.0) (2020-07-27)
 
 ### ⚠ BREAKING CHANGES

@@ -10,27 +10,14 @@ declare function mq<
   QueryNames extends string = string
 >(
   mediaQueries: MediaQueries<QueryNames>
-): MediaQueryCssCallback<QueryNames, Tokens>
-declare function mq<
-  Tokens extends DashTokens = DashTokens,
-  QueryNames extends string = string
->(
-  mediaQueries: MediaQueries<QueryNames>
-): MediaQueryNameCallback<QueryNames, Tokens>
+): {
+  (queryName: QueryNames): string
+  (queryName: MediaQueryObject<QueryNames, Tokens>): (tokens: Tokens) => string
+}
 export default mq
 export declare type MediaQueries<QueryNames extends string> = {
   readonly [K in QueryNames]: string
 }
-declare type MediaQueryNameCallback<
-  QueryNames extends string,
-  Tokens extends DashTokens = DashTokens
-> = (queryName: QueryNames | MediaQueryObject<QueryNames, Tokens>) => string
-declare type MediaQueryCssCallback<
-  QueryNames extends string,
-  Tokens extends DashTokens = DashTokens
-> = (
-  queryName: QueryNames | MediaQueryObject<QueryNames, Tokens>
-) => (tokens: Tokens) => string
 export declare type MediaQueryObject<
   QueryNames extends string,
   Tokens extends DashTokens = DashTokens
