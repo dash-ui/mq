@@ -1,30 +1,12 @@
 import {compileStyles} from '@dash-ui/styles'
 import type {StyleObject, StyleCallback, DashTokens} from '@dash-ui/styles'
 
-// use 1:
-// styles({foo: `${mq('phone')} { display: none; }`})
-//
-// use 2:
-// styles({foo: mq('phone', `display: block;`))
-
 /**
  * A factory function that creates a utility for adding breakpoints and
  * media queries to Dash styles
  *
  * @param mediaQueries A map of media query name/query pairs
  */
-function mq<
-  Tokens extends DashTokens = DashTokens,
-  QueryNames extends string = string
->(
-  mediaQueries: MediaQueries<QueryNames>
-): MediaQueryCssCallback<QueryNames, Tokens>
-function mq<
-  Tokens extends DashTokens = DashTokens,
-  QueryNames extends string = string
->(
-  mediaQueries: MediaQueries<QueryNames>
-): MediaQueryNameCallback<QueryNames, Tokens>
 function mq<
   Tokens extends DashTokens = DashTokens,
   QueryNames extends string = string
@@ -38,10 +20,16 @@ function mq<
    *  is, allowing you to define styles specific to given media queries and
    *  returning a style callback.
    */
+  function mqStyles(queryName: QueryNames): string
+  function mqStyles(
+    queryName: MediaQueryObject<QueryNames, Tokens>
+  ): (tokens: Tokens) => string
   function mqStyles(
     queryName: QueryNames | MediaQueryObject<QueryNames, Tokens>
-  ) {
-    if (typeof queryName === 'object') {
+  ): string | ((tokens: Tokens) => string) {
+    if (typeof queryName === 'string') {
+      return `@media ${mediaQueries[queryName]}`
+    } else {
       return (tokens: Tokens) => {
         let css = ''
 
@@ -61,8 +49,6 @@ function mq<
 
         return css
       }
-    } else {
-      return `@media ${mediaQueries[queryName]}`
     }
   }
 
@@ -74,18 +60,6 @@ export default mq
 export type MediaQueries<QueryNames extends string> = {
   readonly [K in QueryNames]: string
 }
-
-type MediaQueryNameCallback<
-  QueryNames extends string,
-  Tokens extends DashTokens = DashTokens
-> = (queryName: QueryNames | MediaQueryObject<QueryNames, Tokens>) => string
-
-type MediaQueryCssCallback<
-  QueryNames extends string,
-  Tokens extends DashTokens = DashTokens
-> = (
-  queryName: QueryNames | MediaQueryObject<QueryNames, Tokens>
-) => (tokens: Tokens) => string
 
 export type MediaQueryObject<
   QueryNames extends string,
