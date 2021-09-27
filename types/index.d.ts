@@ -1,9 +1,9 @@
-import type { StyleObject, StyleCallback, DashTokens } from "@dash-ui/styles";
+import type { DashTokens, StyleCallback, StyleObject } from "@dash-ui/styles";
 /**
  * A factory function that creates a utility for adding breakpoints and
  * media queries to Dash styles
  *
- * @param mediaQueries A map of media query name/query pairs
+ * @param mediaQueries - A map of media query name/query pairs
  */
 declare function mq<
   Tokens extends DashTokens = DashTokens,
