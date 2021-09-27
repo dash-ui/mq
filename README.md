@@ -1,23 +1,25 @@
-<hr>
-  <br/>
-  <img src='https://github.com/dash-ui/styles/raw/master/assets/logo.png'/>
-  <blockquote>A utility for adding stored media queries and breakpoints to <a href="https://github.com/dash-ui/styles">dash-ui</a></blockquote>
-  
-  <pre>npm i @dash-ui/mq</pre>
-  <br/>
-  
+<hr/>
+
+<img src='https://github.com/dash-ui/styles/raw/main/assets/logo.png'/>
+
+> A utility function for adding reusable media queries and breakpoints to @dash-ui styles
+
+```sh
+npm i @dash-ui/mq
+```
+
+<p>
   <a href="https://bundlephobia.com/result?p=@dash-ui/mq">
     <img alt="Bundlephobia" src="https://img.shields.io/bundlephobia/minzip/@dash-ui/mq?style=for-the-badge&labelColor=24292e">
   </a>
-
   <a aria-label="Types" href="https://www.npmjs.com/package/@dash-ui/mq">
     <img alt="Types" src="https://img.shields.io/npm/types/@dash-ui/mq?style=for-the-badge&labelColor=24292e">
   </a>
   <a aria-label="Code coverage report" href="https://codecov.io/gh/dash-ui/mq">
     <img alt="Code coverage" src="https://img.shields.io/codecov/c/gh/dash-ui/mq?style=for-the-badge&labelColor=24292e">
   </a>
-  <a aria-label="Build status" href="https://travis-ci.com/dash-ui/mq">
-    <img alt="Build status" src="https://img.shields.io/travis/com/dash-ui/mq?style=for-the-badge&labelColor=24292e">
+  <a aria-label="Build status" href="https://github.com/dash-ui/mq/actions/workflows/release.yml">
+    <img alt="Build status" src="https://img.shields.io/github/workflow/status/dash-ui/mq/release/main?style=for-the-badge&labelColor=24292e">
   </a>
   <a aria-label="NPM version" href="https://www.npmjs.com/package/@dash-ui/mq">
     <img alt="NPM Version" src="https://img.shields.io/npm/v/@dash-ui/mq?style=for-the-badge&labelColor=24292e">
@@ -25,46 +27,48 @@
   <a aria-label="License" href="https://jaredlunde.mit-license.org/">
     <img alt="MIT License" src="https://img.shields.io/npm/l/@dash-ui/mq?style=for-the-badge&labelColor=24292e">
   </a>
-<hr>
+</p>
+
+---
 
 ## Quick start
 
 [Check out an example on **CodeSandbox**](https://codesandbox.io/s/dash-uimq-example-sdol5?file=/src/App.tsx)
 
 ```js
-import mq from '@dash-ui/mq'
-import {styles} from '@dash-ui/styles'
+import mq from "@dash-ui/mq";
+import { styles } from "@dash-ui/styles";
 
 const breakpoint = mq({
   // 0px
-  sm: 'only screen and (min-width: 0em)',
+  sm: "only screen and (min-width: 0em)",
   // 560px
-  mq: 'only screen and (min-width: 35em)',
+  mq: "only screen and (min-width: 35em)",
   // 1280px
-  lg: 'only screen and (min-width: 80em)',
-})
+  lg: "only screen and (min-width: 80em)",
+});
 
 const box = styles.one(
   breakpoint({
-    sm: ({color}) => ({
+    sm: ({ color }) => ({
       width: 100,
       height: 100,
       backgroundColor: color.primary,
     }),
-    md: ({color}) => ({
+    md: ({ color }) => ({
       width: 200,
       height: 200,
       backgroundColor: color.primary,
     }),
-    lg: ({color}) => ({
+    lg: ({ color }) => ({
       width: 400,
       height: 400,
       backgroundColor: color.primary,
     }),
   })
-)
+);
 
-export const Component = () => <div className={box()} />
+export const Component = () => <div className={box()} />;
 ```
 
 ## API
@@ -79,15 +83,15 @@ media queries to Dash styles.
 [Check out an example on **CodeSandbox**](https://codesandbox.io/s/dash-uimq-example-sdol5?file=/src/App.tsx)
 
 ```tsx
-import mq from '@dash-ui/mq'
-import {styles} from '@dash-ui/styles'
+import mq from "@dash-ui/mq";
+import { styles } from "@dash-ui/styles";
 
 // Creates the stored media queries
 const breakpoint = mq({
-  sm: 'only screen and (min-width: 0em)',
-  mq: 'only screen and (min-width: 35em)',
-  lg: 'only screen and (min-width: 80em)',
-})
+  sm: "only screen and (min-width: 0em)",
+  mq: "only screen and (min-width: 35em)",
+  lg: "only screen and (min-width: 80em)",
+});
 
 // Can be used as a shortcut for `@media ...`
 const boxOne = styles.one`
@@ -97,17 +101,17 @@ const boxOne = styles.one`
   /**
    * This box will be 400x400 when "md" breakpoint matches
    */
-  ${breakpoint('md')} {
+  ${breakpoint("md")} {
     width: 400px;
     height: 400px;
   }
-`
+`;
 
 // Can be used like a style mapping
 const boxTwo = styles.one(
   breakpoint({
     // This box will always have a `primary` color background
-    default: ({color}) => ({
+    default: ({ color }) => ({
       backgroundColor: color.primary,
     }),
     // This box will be 100x100 when `sm` media query is matched
@@ -126,14 +130,14 @@ const boxTwo = styles.one(
       height: 400px
     `,
   })
-)
+);
 
 const Component = () => (
   <React.Fragment>
     <div className={boxOne()} />
     <div className={boxTwo()} />
   </React.Fragment>
-)
+);
 ```
 
 #### Arguments
@@ -144,13 +148,13 @@ function mq<
   QueryNames extends string = string
 >(
   mediaQueries: MediaQueries<QueryNames>
-): MediaQueryCssCallback<QueryNames, Tokens>
+): MediaQueryCssCallback<QueryNames, Tokens>;
 function mq<
   Tokens extends DashTokens = DashTokens,
   QueryNames extends string = string
 >(
   mediaQueries: MediaQueries<QueryNames>
-): MediaQueryNameCallback<QueryNames, Tokens>
+): MediaQueryNameCallback<QueryNames, Tokens>;
 ```
 
 | Argument     | Type                                   | Required? | Description                           |
@@ -164,7 +168,7 @@ function mq<
 // will return a `MediaQueryNameCallback`, otherwise a `MediaQueryCssCallback`
 function mqStyles(
   queryName: QueryNames | MediaQueryObject<QueryNames, Tokens>
-): MediaQueryNameCallback | MediaQueryCssCallback
+): MediaQueryNameCallback | MediaQueryCssCallback;
 ```
 
 ### MediaQueryNameCallback
@@ -175,7 +179,7 @@ A function that returns a media query string e.g. `"@media only screen and (min-
 type MediaQueryNameCallback<
   QueryNames extends string,
   Tokens extends DashTokens = DashTokens
-> = (queryName: QueryNames | MediaQueryObject<QueryNames, Tokens>) => string
+> = (queryName: QueryNames | MediaQueryObject<QueryNames, Tokens>) => string;
 ```
 
 ### MediaQueryCssCallback
@@ -189,17 +193,17 @@ type MediaQueryCssCallback<
   Tokens extends DashTokens = DashTokens
 > = (
   queryName: QueryNames | MediaQueryObject<QueryNames, Tokens>
-) => (tokens: Tokens) => string
+) => (tokens: Tokens) => string;
 
 export type MediaQueryObject<
   QueryNames extends string,
   Tokens extends DashTokens = DashTokens
 > = {
-  readonly [K in QueryNames | 'default']?:
+  readonly [K in QueryNames | "default"]?:
     | string
     | StyleObject
-    | StyleCallback<Tokens>
-}
+    | StyleCallback<Tokens>;
+};
 ```
 
 ## LICENSE

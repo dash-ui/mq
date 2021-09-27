@@ -1,4 +1,4 @@
-import type {StyleObject, StyleCallback, DashTokens} from '@dash-ui/styles'
+import type { StyleObject, StyleCallback, DashTokens } from "@dash-ui/styles";
 /**
  * A factory function that creates a utility for adding breakpoints and
  * media queries to Dash styles
@@ -11,19 +11,19 @@ declare function mq<
 >(
   mediaQueries: MediaQueries<QueryNames>
 ): {
-  (queryName: QueryNames): string
-  (queryName: MediaQueryObject<QueryNames, Tokens>): (tokens: Tokens) => string
-}
-export default mq
+  (queryName: QueryNames): string;
+  (queryName: MediaQueryObject<QueryNames, Tokens>): (tokens: Tokens) => string;
+};
+export default mq;
 export declare type MediaQueries<QueryNames extends string> = {
-  readonly [K in QueryNames]: string
-}
+  readonly [K in QueryNames]: string;
+};
 export declare type MediaQueryObject<
   QueryNames extends string,
   Tokens extends DashTokens = DashTokens
 > = {
-  readonly [K in QueryNames | 'default']?:
+  readonly [K in QueryNames | "default"]?:
     | string
     | StyleObject
-    | StyleCallback<Tokens>
-}
+    | StyleCallback<Tokens>;
+};
