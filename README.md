@@ -39,7 +39,7 @@ npm i @dash-ui/mq
 import mq from "@dash-ui/mq";
 import { styles } from "@dash-ui/styles";
 
-const breakpoint = mq({
+const breakpoint = mq(styles, {
   // 0px
   sm: "only screen and (min-width: 0em)",
   // 560px
@@ -87,7 +87,7 @@ import mq from "@dash-ui/mq";
 import { styles } from "@dash-ui/styles";
 
 // Creates the stored media queries
-const breakpoint = mq({
+const breakpoint = mq(styles, {
   sm: "only screen and (min-width: 0em)",
   mq: "only screen and (min-width: 35em)",
   lg: "only screen and (min-width: 80em)",
@@ -145,20 +145,22 @@ const Component = () => (
 ```typescript
 function mq<
   Tokens extends DashTokens = DashTokens,
+  Themes extends DashThemes = DashThemes,
   QueryNames extends string = string
 >(
+  styles: Styles<Tokens, Themes>,
   mediaQueries: MediaQueries<QueryNames>
-): MediaQueryCssCallback<QueryNames, Tokens>;
-function mq<
-  Tokens extends DashTokens = DashTokens,
-  QueryNames extends string = string
->(
-  mediaQueries: MediaQueries<QueryNames>
-): MediaQueryNameCallback<QueryNames, Tokens>;
+): {
+  (queryName: QueryNames): string;
+  (queryName: MediaQueryObject<QueryNames, Tokens, Themes>): (
+    tokens: TokensUnion<Tokens, Themes>
+  ) => string;
+};
 ```
 
 | Argument     | Type                                   | Required? | Description                           |
 | ------------ | -------------------------------------- | --------- | ------------------------------------- |
+| styles       | `styles`                               | Yes       | A Dash `styles` instance              |
 | mediaQueries | `{readonly [K in QueryNames]: string}` | Yes       | A map of media query name/query pairs |
 
 #### Returns
@@ -166,44 +168,10 @@ function mq<
 ```typescript
 // When a `string` is provided as the `mediaQueries` argument, this
 // will return a `MediaQueryNameCallback`, otherwise a `MediaQueryCssCallback`
+function mqStyles(queryName: QueryNames): string;
 function mqStyles(
-  queryName: QueryNames | MediaQueryObject<QueryNames, Tokens>
-): MediaQueryNameCallback | MediaQueryCssCallback;
-```
-
-### MediaQueryNameCallback
-
-A function that returns a media query string e.g. `"@media only screen and (min-width: 0em)"`.
-
-```typescript
-type MediaQueryNameCallback<
-  QueryNames extends string,
-  Tokens extends DashTokens = DashTokens
-> = (queryName: QueryNames | MediaQueryObject<QueryNames, Tokens>) => string;
-```
-
-### MediaQueryCssCallback
-
-A style callback which can be provided to any [`@dash-ui/styles`](https://github.com/dash-ui/styles)
-functions that accept one. i.e. `styles()`, `styles.one()`, `styles.cls()`, and `styles.insertGlobal()`
-
-```typescript
-type MediaQueryCssCallback<
-  QueryNames extends string,
-  Tokens extends DashTokens = DashTokens
-> = (
-  queryName: QueryNames | MediaQueryObject<QueryNames, Tokens>
-) => (tokens: Tokens) => string;
-
-export type MediaQueryObject<
-  QueryNames extends string,
-  Tokens extends DashTokens = DashTokens
-> = {
-  readonly [K in QueryNames | "default"]?:
-    | string
-    | StyleObject
-    | StyleCallback<Tokens>;
-};
+  queryName: MediaQueryObject<QueryNames, Tokens, Themes>
+): (tokens: TokensUnion<Tokens, Themes>) => string;
 ```
 
 ## LICENSE

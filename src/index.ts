@@ -1,16 +1,25 @@
-import { compileStyles } from "@dash-ui/styles";
-import type { DashTokens, StyleCallback, StyleObject } from "@dash-ui/styles";
+import type {
+  DashThemes,
+  DashTokens,
+  StyleCallback,
+  StyleObject,
+  Styles,
+  TokensUnion,
+} from "@dash-ui/styles";
 
 /**
  * A factory function that creates a utility for adding breakpoints and
  * media queries to Dash styles
  *
+ * @param styles - A Dash `styles` instance
  * @param mediaQueries - A map of media query name/query pairs
  */
 function mq<
   Tokens extends DashTokens = DashTokens,
+  Themes extends DashThemes = DashThemes,
   QueryNames extends string = string
->(mediaQueries: MediaQueries<QueryNames>) {
+>(styles: Styles<Tokens, Themes>, mediaQueries: MediaQueries<QueryNames>) {
+  const oneMemo = memoize(styles.one);
   /**
    * A utility for adding media queries and breakpoints to Dash styles
    *
@@ -22,24 +31,24 @@ function mq<
    */
   function mqStyles(queryName: QueryNames): string;
   function mqStyles(
-    queryName: MediaQueryObject<QueryNames, Tokens>
-  ): (tokens: Tokens) => string;
+    queryName: MediaQueryObject<QueryNames, Tokens, Themes>
+  ): (tokens: TokensUnion<Tokens, Themes>) => string;
   function mqStyles(
-    queryName: QueryNames | MediaQueryObject<QueryNames, Tokens>
-  ): string | ((tokens: Tokens) => string) {
+    queryName: QueryNames | MediaQueryObject<QueryNames, Tokens, Themes>
+  ): string | ((tokens: TokensUnion<Tokens, Themes>) => string) {
     if (typeof queryName === "string") {
       return `@media ${mediaQueries[queryName]}`;
     } else {
-      return (tokens: Tokens) => {
+      return () => {
         let css = "";
 
         for (const key in queryName) {
           let value =
-            queryName[key as keyof MediaQueryObject<QueryNames, Tokens>];
+            queryName[
+              key as keyof MediaQueryObject<QueryNames, Tokens, Themes>
+            ];
           value =
-            typeof value === "string"
-              ? value
-              : compileStyles<Tokens>(value, tokens);
+            !value || typeof value === "string" ? value || "" : oneMemo(value);
 
           css +=
             key === "default"
@@ -55,6 +64,22 @@ function mq<
   return mqStyles;
 }
 
+function memoize(fn: Styles<any, any>["one"]) {
+  const cache = new WeakMap<StyleObject | StyleCallback<any, any>, string>();
+
+  return (value: StyleObject | StyleCallback<any, any>) => {
+    const cached = cache.get(value);
+
+    if (cached) {
+      return cached;
+    }
+
+    const css = fn(value).css();
+    cache.set(value, css);
+    return css;
+  };
+}
+
 export default mq;
 
 export type MediaQueries<QueryNames extends string> = {
@@ -63,10 +88,11 @@ export type MediaQueries<QueryNames extends string> = {
 
 export type MediaQueryObject<
   QueryNames extends string,
-  Tokens extends DashTokens = DashTokens
+  Tokens extends DashTokens = DashTokens,
+  Themes extends DashThemes = DashThemes
 > = {
   readonly [K in QueryNames | "default"]?:
     | string
     | StyleObject
-    | StyleCallback<Tokens>;
+    | StyleCallback<Tokens, Themes>;
 };

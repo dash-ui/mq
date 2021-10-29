@@ -1,3 +1,4 @@
+import { createStyles } from "@dash-ui/styles";
 import mq from "./index";
 
 const breakpoints = {
@@ -17,19 +18,21 @@ const breakpoints = {
 };
 
 describe("mq()", () => {
+  const styles = createStyles({
+    tokens: {
+      color: {
+        blue: "blue",
+      },
+    },
+  });
+
   it("should return a media query string when first argument is a string", () => {
-    const breakpoint = mq(breakpoints);
+    const breakpoint = mq(styles, breakpoints);
     expect(breakpoint("phone")).toBe("@media only screen and (min-width: 0em)");
   });
 
   it("should return a css getter when first argument is an object", () => {
-    type Variables = {
-      color: {
-        blue: string;
-      };
-    };
-
-    const breakpoint = mq<Variables, keyof typeof breakpoints>(breakpoints);
+    const breakpoint = mq(styles, breakpoints);
     expect(
       breakpoint({ phone: ({ color }) => `color: ${color.blue};` })({
         color: { blue: "var(--color-blue)" },
@@ -40,13 +43,7 @@ describe("mq()", () => {
   });
 
   it("should apply default styles for breakpoint objects", () => {
-    type Variables = {
-      color: {
-        blue: string;
-      };
-    };
-
-    const breakpoint = mq<Variables, keyof typeof breakpoints>(breakpoints);
+    const breakpoint = mq(styles, breakpoints);
     expect(
       breakpoint({
         default: `color: green;`,
@@ -60,13 +57,7 @@ describe("mq()", () => {
   });
 
   it("should apply styles for breakpoint objects w/ string style", () => {
-    type Variables = {
-      color: {
-        blue: string;
-      };
-    };
-
-    const breakpoint = mq<Variables, keyof typeof breakpoints>(breakpoints);
+    const breakpoint = mq(styles, breakpoints);
     expect(
       breakpoint({
         default: `color: green;`,
@@ -80,20 +71,22 @@ describe("mq()", () => {
   });
 
   it("should apply styles for breakpoint objects w/ object style", () => {
-    type Variables = {
-      color: {
-        blue: string;
-      };
-    };
-
-    const breakpoint = mq<Variables, keyof typeof breakpoints>(breakpoints);
+    const breakpoint = mq(styles, breakpoints);
+    const bp = breakpoint({
+      default: `color: green;`,
+      phone: {
+        color: "var(--color-blue)",
+      },
+    });
     expect(
-      breakpoint({
-        default: `color: green;`,
-        phone: {
-          color: "var(--color-blue)",
-        },
-      })({
+      bp({
+        color: { blue: "var(--color-blue)" },
+      })
+    ).toBe(
+      "color: green;@media only screen and (min-width: 0em){color:var(--color-blue);}"
+    );
+    expect(
+      bp({
         color: { blue: "var(--color-blue)" },
       })
     ).toBe(
