@@ -19,7 +19,6 @@ function mq<
   Themes extends DashThemes = DashThemes,
   QueryNames extends string = string
 >(styles: Styles<Tokens, Themes>, mediaQueries: MediaQueries<QueryNames>) {
-  const oneMemo = memoize(styles.one);
   /**
    * A utility for adding media queries and breakpoints to Dash styles
    *
@@ -39,45 +38,27 @@ function mq<
     if (typeof queryName === "string") {
       return `@media ${mediaQueries[queryName]}`;
     } else {
-      return () => {
-        let css = "";
+      let css = "";
 
-        for (const key in queryName) {
-          let value =
-            queryName[
-              key as keyof MediaQueryObject<QueryNames, Tokens, Themes>
-            ];
-          value =
-            !value || typeof value === "string" ? value || "" : oneMemo(value);
+      for (const key in queryName) {
+        let value =
+          queryName[key as keyof MediaQueryObject<QueryNames, Tokens, Themes>];
+        value =
+          !value || typeof value === "string"
+            ? value || ""
+            : styles.one(value).css();
 
-          css +=
-            key === "default"
-              ? value
-              : `@media ${mediaQueries[key as QueryNames]}{${value}}`;
-        }
+        css +=
+          key === "default"
+            ? value
+            : `@media ${mediaQueries[key as QueryNames]}{${value}}`;
+      }
 
-        return css;
-      };
+      return css;
     }
   }
 
   return mqStyles;
-}
-
-function memoize(fn: Styles<any, any>["one"]) {
-  const cache = new WeakMap<StyleObject | StyleCallback<any, any>, string>();
-
-  return (value: StyleObject | StyleCallback<any, any>) => {
-    const cached = cache.get(value);
-
-    if (cached) {
-      return cached;
-    }
-
-    const css = fn(value).css();
-    cache.set(value, css);
-    return css;
-  };
 }
 
 export default mq;
