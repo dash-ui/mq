@@ -152,9 +152,7 @@ function mq<
   mediaQueries: MediaQueries<QueryNames>
 ): {
   (queryName: QueryNames): string;
-  (queryName: MediaQueryObject<QueryNames, Tokens, Themes>): (
-    tokens: TokensUnion<Tokens, Themes>
-  ) => string;
+  (queryName: MediaQueryObject<QueryNames, Tokens, Themes>): string;
 };
 ```
 
@@ -171,7 +169,7 @@ function mq<
 function mqStyles(queryName: QueryNames): string;
 function mqStyles(
   queryName: MediaQueryObject<QueryNames, Tokens, Themes>
-): (tokens: TokensUnion<Tokens, Themes>) => string;
+): string;
 ```
 
 ## LICENSE

@@ -4,7 +4,6 @@ import type {
   StyleCallback,
   StyleObject,
   Styles,
-  TokensUnion,
 } from "@dash-ui/styles";
 
 /**
@@ -31,10 +30,10 @@ function mq<
   function mqStyles(queryName: QueryNames): string;
   function mqStyles(
     queryName: MediaQueryObject<QueryNames, Tokens, Themes>
-  ): (tokens: TokensUnion<Tokens, Themes>) => string;
+  ): string;
   function mqStyles(
     queryName: QueryNames | MediaQueryObject<QueryNames, Tokens, Themes>
-  ): string | ((tokens: TokensUnion<Tokens, Themes>) => string) {
+  ): string {
     if (typeof queryName === "string") {
       return `@media ${mediaQueries[queryName]}`;
     } else {
