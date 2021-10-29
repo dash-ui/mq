@@ -1,3 +1,13 @@
+# [1.0.0-alpha.1](https://github.com/dash-ui/mq/compare/v0.4.1...v1.0.0-alpha.1) (2021-10-29)
+
+### Features
+
+- add memoization and update types ([a132c8d](https://github.com/dash-ui/mq/commit/a132c8df120a47d0f7e7391f412f4e12c3ab8d2e))
+
+### BREAKING CHANGES
+
+- `styles` instances are now required as a first argument in the initializer
+
 # Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.

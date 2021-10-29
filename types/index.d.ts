@@ -10,6 +10,7 @@ import type {
  * A factory function that creates a utility for adding breakpoints and
  * media queries to Dash styles
  *
+ * @param styles - A Dash `styles` instance
  * @param mediaQueries - A map of media query name/query pairs
  */
 declare function mq<
