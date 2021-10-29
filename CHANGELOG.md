@@ -1,3 +1,10 @@
+# [1.0.0-alpha.3](https://github.com/dash-ui/mq/compare/v1.0.0-alpha.2...v1.0.0-alpha.3) (2021-10-29)
+
+
+### Bug Fixes
+
+* force new version ([82cc051](https://github.com/dash-ui/mq/commit/82cc051ac0b43950169ef405fe7d5d654625f6e6))
+
 # [1.0.0-alpha.2](https://github.com/dash-ui/mq/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2021-10-29)
 
 

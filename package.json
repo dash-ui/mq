@@ -1,6 +1,6 @@
 {
   "name": "@dash-ui/mq",
-  "version": "1.0.0-alpha.2",
+  "version": "1.0.0-alpha.3",
   "description": "A utility function for adding reusable media queries and breakpoints to @dash-ui styles",
   "keywords": [
     "mq",
