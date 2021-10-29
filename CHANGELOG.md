@@ -1,3 +1,10 @@
+# [1.0.0-alpha.2](https://github.com/dash-ui/mq/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2021-10-29)
+
+
+### Performance Improvements
+
+* remove memoization, just return the compiled string ([4123031](https://github.com/dash-ui/mq/commit/4123031b840e4161319bac6f913414c8e3b4c4d8))
+
 # [1.0.0-alpha.1](https://github.com/dash-ui/mq/compare/v0.4.1...v1.0.0-alpha.1) (2021-10-29)
 
 ### Features
