@@ -23,9 +23,8 @@ function mq<
    *
    * @param queryName - When a `string`, this will return a `string`
    *  media query e.g. `@media only screen and (min-width: 0em)`.
-   *  When an object, it is used the same way as the `styles()` instance
-   *  is, allowing you to define styles specific to given media queries and
-   *  returning a style callback.
+   *  When an object, it is used the same way as the `styles` instance
+   *  is, allowing you to define styles specific to given media queries.
    */
   function mqStyles(queryName: QueryNames): string;
   function mqStyles(
