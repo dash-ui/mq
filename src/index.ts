@@ -23,7 +23,7 @@ function mq<
   ) as unknown as (keyof MediaQueries<QueryNames>)[];
   mediaQueryNames.unshift("default" as any);
   const namesLen = mediaQueryNames.length;
-  let i = 0;
+
   /**
    * A utility for adding media queries and breakpoints to Dash styles
    *
@@ -44,9 +44,9 @@ function mq<
     } else {
       let css = "";
 
-      for (i = 0; i < namesLen; i++) {
+      for (let i = 0; i < namesLen; i++) {
         const key = mediaQueryNames[i];
-        if (key in queryName) {
+        if (queryName[key] !== void 0) {
           let value = queryName[key];
           value =
             !value || typeof value === "string"
