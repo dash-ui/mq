@@ -1,3 +1,10 @@
+# [1.0.0-alpha.6](https://github.com/dash-ui/mq/compare/v1.0.0-alpha.5...v1.0.0-alpha.6) (2021-10-30)
+
+
+### Bug Fixes
+
+* get rid of the riff raff ([5ad5ac9](https://github.com/dash-ui/mq/commit/5ad5ac952d75bb3796b19d5693d78a49c5a6f8d5))
+
 # [1.0.0-alpha.5](https://github.com/dash-ui/mq/compare/v1.0.0-alpha.4...v1.0.0-alpha.5) (2021-10-30)
 
 
