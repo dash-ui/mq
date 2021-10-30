@@ -1,3 +1,10 @@
+# [1.0.0-alpha.4](https://github.com/dash-ui/mq/compare/v1.0.0-alpha.3...v1.0.0-alpha.4) (2021-10-30)
+
+
+### Features
+
+* allow numbers as media query names ([fa04f47](https://github.com/dash-ui/mq/commit/fa04f47629dc42035899ed1f3b9932b8d11cc326))
+
 # [1.0.0-alpha.3](https://github.com/dash-ui/mq/compare/v1.0.0-alpha.2...v1.0.0-alpha.3) (2021-10-29)
 
 
