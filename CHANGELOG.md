@@ -1,3 +1,10 @@
+# [1.0.0-alpha.5](https://github.com/dash-ui/mq/compare/v1.0.0-alpha.4...v1.0.0-alpha.5) (2021-10-30)
+
+
+### Bug Fixes
+
+* make media queries obey order of breakpoints ([8887345](https://github.com/dash-ui/mq/commit/8887345c98df2e9c842b7c9beb36742331cb9017))
+
 # [1.0.0-alpha.4](https://github.com/dash-ui/mq/compare/v1.0.0-alpha.3...v1.0.0-alpha.4) (2021-10-30)
 
 
