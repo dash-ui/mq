@@ -75,4 +75,21 @@ describe("mq()", () => {
       "color: green;@media only screen and (min-width: 0em){color:var(--color-blue);}"
     );
   });
+
+  it("should apply styles in order of keys in breakpoitns", () => {
+    const breakpoint = mq(styles, breakpoints);
+    expect(
+      breakpoint({
+        tablet: {
+          color: "var(--color-red)",
+        },
+        phone: {
+          color: "var(--color-blue)",
+        },
+        default: `color: green;`,
+      })
+    ).toBe(
+      `color: green;@media ${breakpoints.phone}{color:var(--color-blue);}@media ${breakpoints.tablet}{color:var(--color-red);}`
+    );
+  });
 });

@@ -18,6 +18,12 @@ function mq<
   Themes extends DashThemes = DashThemes,
   QueryNames extends string | number = string | number
 >(styles: Styles<Tokens, Themes>, mediaQueries: MediaQueries<QueryNames>) {
+  const mediaQueryNames = Object.keys(
+    mediaQueries
+  ) as unknown as (keyof MediaQueries<QueryNames>)[];
+  mediaQueryNames.unshift("default" as any);
+  const namesLen = mediaQueryNames.length;
+  let i = 0;
   /**
    * A utility for adding media queries and breakpoints to Dash styles
    *
@@ -38,18 +44,20 @@ function mq<
     } else {
       let css = "";
 
-      for (const key in queryName) {
-        let value =
-          queryName[key as keyof MediaQueryObject<QueryNames, Tokens, Themes>];
-        value =
-          !value || typeof value === "string"
-            ? value || ""
-            : styles.one(value).css();
+      for (i = 0; i < namesLen; i++) {
+        const key = mediaQueryNames[i];
+        if (key in queryName) {
+          let value = queryName[key];
+          value =
+            !value || typeof value === "string"
+              ? value || ""
+              : styles.one(value).css();
 
-        css +=
-          key === "default"
-            ? value
-            : `@media ${mediaQueries[key as QueryNames]}{${value}}`;
+          css +=
+            key === "default"
+              ? value
+              : `@media ${mediaQueries[key as QueryNames]}{${value}}`;
+        }
       }
 
       return css;
