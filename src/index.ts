@@ -16,7 +16,7 @@ import type {
 function mq<
   Tokens extends DashTokens = DashTokens,
   Themes extends DashThemes = DashThemes,
-  QueryNames extends string = string
+  QueryNames extends string | number = string | number
 >(styles: Styles<Tokens, Themes>, mediaQueries: MediaQueries<QueryNames>) {
   /**
    * A utility for adding media queries and breakpoints to Dash styles
@@ -33,7 +33,7 @@ function mq<
   function mqStyles(
     queryName: QueryNames | MediaQueryObject<QueryNames, Tokens, Themes>
   ): string {
-    if (typeof queryName === "string") {
+    if (typeof queryName !== "object") {
       return `@media ${mediaQueries[queryName]}`;
     } else {
       let css = "";
@@ -61,12 +61,12 @@ function mq<
 
 export default mq;
 
-export type MediaQueries<QueryNames extends string> = {
+export type MediaQueries<QueryNames extends string | number> = {
   readonly [K in QueryNames]: string;
 };
 
 export type MediaQueryObject<
-  QueryNames extends string,
+  QueryNames extends string | number,
   Tokens extends DashTokens = DashTokens,
   Themes extends DashThemes = DashThemes
 > = {
