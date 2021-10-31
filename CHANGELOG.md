@@ -1,3 +1,10 @@
+# [1.0.0-alpha.7](https://github.com/dash-ui/mq/compare/v1.0.0-alpha.6...v1.0.0-alpha.7) (2021-10-31)
+
+
+### Performance Improvements
+
+* concat strings instead of interpolating ([8f1cfb0](https://github.com/dash-ui/mq/commit/8f1cfb0c417118ce056eb2c62d9c113b34b412dc))
+
 # [1.0.0-alpha.6](https://github.com/dash-ui/mq/compare/v1.0.0-alpha.5...v1.0.0-alpha.6) (2021-10-30)
 
 
