@@ -56,7 +56,7 @@ function mq<
           css +=
             key === "default"
               ? value
-              : `@media ${mediaQueries[key as QueryNames]}{${value}}`;
+              : "@media " + mediaQueries[key as QueryNames] + "{" + value + "}";
         }
       }
 
