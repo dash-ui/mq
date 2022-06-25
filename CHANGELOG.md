@@ -1,3 +1,27 @@
+# [1.0.0](https://github.com/dash-ui/mq/compare/v0.4.1...v1.0.0) (2022-06-25)
+
+### Bug Fixes
+
+- force new version ([82cc051](https://github.com/dash-ui/mq/commit/82cc051ac0b43950169ef405fe7d5d654625f6e6))
+- get rid of the riff raff ([5ad5ac9](https://github.com/dash-ui/mq/commit/5ad5ac952d75bb3796b19d5693d78a49c5a6f8d5))
+- make media queries obey order of breakpoints ([8887345](https://github.com/dash-ui/mq/commit/8887345c98df2e9c842b7c9beb36742331cb9017))
+- remove alpha peer deps ([3e59d3b](https://github.com/dash-ui/mq/commit/3e59d3b91a9321f01241886c1f06a7a5fd9f917a))
+
+### Features
+
+- add memoization and update types ([a132c8d](https://github.com/dash-ui/mq/commit/a132c8df120a47d0f7e7391f412f4e12c3ab8d2e))
+- allow numbers as media query names ([fa04f47](https://github.com/dash-ui/mq/commit/fa04f47629dc42035899ed1f3b9932b8d11cc326))
+- release alpha ([8764b1c](https://github.com/dash-ui/mq/commit/8764b1c25355d19d26bb94947d656d22cdc3d34b))
+
+### Performance Improvements
+
+- concat strings instead of interpolating ([8f1cfb0](https://github.com/dash-ui/mq/commit/8f1cfb0c417118ce056eb2c62d9c113b34b412dc))
+- remove memoization, just return the compiled string ([4123031](https://github.com/dash-ui/mq/commit/4123031b840e4161319bac6f913414c8e3b4c4d8))
+
+### BREAKING CHANGES
+
+- `styles` instances are now required as a first argument in the initializer
+
 # [1.0.0-alpha.8](https://github.com/dash-ui/mq/compare/v1.0.0-alpha.7...v1.0.0-alpha.8) (2022-06-25)
 
 ### Bug Fixes
