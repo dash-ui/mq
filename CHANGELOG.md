@@ -1,44 +1,44 @@
-# [1.0.0-alpha.7](https://github.com/dash-ui/mq/compare/v1.0.0-alpha.6...v1.0.0-alpha.7) (2021-10-31)
+# [1.0.0-alpha.8](https://github.com/dash-ui/mq/compare/v1.0.0-alpha.7...v1.0.0-alpha.8) (2022-06-25)
 
+### Bug Fixes
+
+- remove alpha peer deps ([3e59d3b](https://github.com/dash-ui/mq/commit/3e59d3b91a9321f01241886c1f06a7a5fd9f917a))
+
+# [1.0.0-alpha.7](https://github.com/dash-ui/mq/compare/v1.0.0-alpha.6...v1.0.0-alpha.7) (2021-10-31)
 
 ### Performance Improvements
 
-* concat strings instead of interpolating ([8f1cfb0](https://github.com/dash-ui/mq/commit/8f1cfb0c417118ce056eb2c62d9c113b34b412dc))
+- concat strings instead of interpolating ([8f1cfb0](https://github.com/dash-ui/mq/commit/8f1cfb0c417118ce056eb2c62d9c113b34b412dc))
 
 # [1.0.0-alpha.6](https://github.com/dash-ui/mq/compare/v1.0.0-alpha.5...v1.0.0-alpha.6) (2021-10-30)
 
-
 ### Bug Fixes
 
-* get rid of the riff raff ([5ad5ac9](https://github.com/dash-ui/mq/commit/5ad5ac952d75bb3796b19d5693d78a49c5a6f8d5))
+- get rid of the riff raff ([5ad5ac9](https://github.com/dash-ui/mq/commit/5ad5ac952d75bb3796b19d5693d78a49c5a6f8d5))
 
 # [1.0.0-alpha.5](https://github.com/dash-ui/mq/compare/v1.0.0-alpha.4...v1.0.0-alpha.5) (2021-10-30)
 
-
 ### Bug Fixes
 
-* make media queries obey order of breakpoints ([8887345](https://github.com/dash-ui/mq/commit/8887345c98df2e9c842b7c9beb36742331cb9017))
+- make media queries obey order of breakpoints ([8887345](https://github.com/dash-ui/mq/commit/8887345c98df2e9c842b7c9beb36742331cb9017))
 
 # [1.0.0-alpha.4](https://github.com/dash-ui/mq/compare/v1.0.0-alpha.3...v1.0.0-alpha.4) (2021-10-30)
 
-
 ### Features
 
-* allow numbers as media query names ([fa04f47](https://github.com/dash-ui/mq/commit/fa04f47629dc42035899ed1f3b9932b8d11cc326))
+- allow numbers as media query names ([fa04f47](https://github.com/dash-ui/mq/commit/fa04f47629dc42035899ed1f3b9932b8d11cc326))
 
 # [1.0.0-alpha.3](https://github.com/dash-ui/mq/compare/v1.0.0-alpha.2...v1.0.0-alpha.3) (2021-10-29)
 
-
 ### Bug Fixes
 
-* force new version ([82cc051](https://github.com/dash-ui/mq/commit/82cc051ac0b43950169ef405fe7d5d654625f6e6))
+- force new version ([82cc051](https://github.com/dash-ui/mq/commit/82cc051ac0b43950169ef405fe7d5d654625f6e6))
 
 # [1.0.0-alpha.2](https://github.com/dash-ui/mq/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2021-10-29)
 
-
 ### Performance Improvements
 
-* remove memoization, just return the compiled string ([4123031](https://github.com/dash-ui/mq/commit/4123031b840e4161319bac6f913414c8e3b4c4d8))
+- remove memoization, just return the compiled string ([4123031](https://github.com/dash-ui/mq/commit/4123031b840e4161319bac6f913414c8e3b4c4d8))
 
 # [1.0.0-alpha.1](https://github.com/dash-ui/mq/compare/v0.4.1...v1.0.0-alpha.1) (2021-10-29)
 

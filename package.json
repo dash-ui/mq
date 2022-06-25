@@ -1,6 +1,6 @@
 {
   "name": "@dash-ui/mq",
-  "version": "1.0.0-alpha.7",
+  "version": "1.0.0-alpha.8",
   "description": "A utility function for adding reusable media queries and breakpoints to @dash-ui styles",
   "license": "MIT",
   "author": "Jared Lunde <jared.lunde@gmail.com> (https://jaredlunde.com/)",
