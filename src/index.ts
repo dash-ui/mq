@@ -17,7 +17,10 @@ function mq<
   Tokens extends DashTokens = DashTokens,
   Themes extends DashThemes = DashThemes,
   QueryNames extends string | number = string | number
->(styles: Styles<Tokens, Themes>, mediaQueries: MediaQueries<QueryNames>) {
+>(
+  styles: Styles<Tokens, Themes>,
+  mediaQueries: MediaQueries<QueryNames>
+): MqStyles<QueryNames, Tokens, Themes> {
   const mediaQueryNames = Object.keys(
     mediaQueries
   ) as unknown as (keyof MediaQueries<QueryNames>)[];
@@ -32,10 +35,6 @@ function mq<
    *  When an object, it is used the same way as the `styles` instance
    *  is, allowing you to define styles specific to given media queries.
    */
-  function mqStyles(queryName: QueryNames): string;
-  function mqStyles(
-    queryName: MediaQueryObject<QueryNames, Tokens, Themes>
-  ): string;
   function mqStyles(
     queryName: QueryNames | MediaQueryObject<QueryNames, Tokens, Themes>
   ): string {
@@ -68,6 +67,18 @@ function mq<
 }
 
 export default mq;
+
+export type MqStyles<
+  QueryNames extends string | number,
+  Tokens extends DashTokens = DashTokens,
+  Themes extends DashThemes = DashThemes
+> = {
+  (queryName: QueryNames): string;
+  (queryName: MediaQueryObject<QueryNames, Tokens, Themes>): string;
+  (
+    queryName: QueryNames | MediaQueryObject<QueryNames, Tokens, Themes>
+  ): string;
+};
 
 export type MediaQueries<QueryNames extends string | number> = {
   readonly [K in QueryNames]: string;
