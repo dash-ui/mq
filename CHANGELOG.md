@@ -1,3 +1,9 @@
+## [1.0.1](https://github.com/dash-ui/mq/compare/v1.0.0...v1.0.1) (2022-08-18)
+
+### Bug Fixes
+
+- add explicit function return types ([#12](https://github.com/dash-ui/mq/issues/12)) ([8dc23af](https://github.com/dash-ui/mq/commit/8dc23af4fddfc0fabb2ffa453ad915942e2d453d))
+
 # [1.0.0](https://github.com/dash-ui/mq/compare/v0.4.1...v1.0.0) (2022-06-25)
 
 ### Bug Fixes
